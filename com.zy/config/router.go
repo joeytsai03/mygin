@@ -22,21 +22,21 @@ func Init_router() *gin.Engine {
 	// 使用gin的Query参数形式,/test6?firstname=Jane&lastname=Doe
 	group.GET("/test6", service.Func6)
 	group.POST("/test7", service.Func7)
+
+
+	//静态文件路径配置
+	router.StaticFS("/assets", http.Dir("./com.zy/static/assets"))
 	// 下面测试加载HTML: LoadHTMLTemplates
 	// 加载static文件夹下所有的文件
-	router.LoadHTMLGlob("com.zy/static/templates/**/*")
+	//二级目录
+	router.LoadHTMLGlob("com.zy/static/templates/**/*.html")
+	//一级目录
+	router.LoadHTMLGlob("com.zy/static/templates/*.html")
+
+
 	// 或者使用这种方法加载也是OK的: router.LoadHTMLFiles("templates/template1.templates", "templates/template2.templates")
-	router.GET("users/login", func(c *gin.Context) {
-		// 注意下面将gin.H参数传入index.tmpl中!也就是使用的是index.tmpl模板
-		c.HTML(http.StatusOK, "users/login.html", gin.H{
-			"title": "GIN: 测试加载HTML模板",
-		})
-	})
-	router.GET("posts/login", func(c *gin.Context) {
-		// 注意下面将gin.H参数传入index.tmpl中!也就是使用的是index.tmpl模板
-		c.HTML(http.StatusOK, "posts/login.html", gin.H{
-			"title": "GIN: 测试加载HTML模板",
-		})
-	})
+	router.GET("users/login", service.User_login)
+	router.GET("posts/login", service.Posts_logion)
+	router.GET("index", service.Index)
 	return router
 }

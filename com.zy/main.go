@@ -2,7 +2,7 @@ package main
 //import "net/http"
 //参考 ： http://www.okyes.me/2016/05/03/go-gin.html
 import (
-	"./com.zy/config"
+	"./config"
 	"net/http"
 	"time"
 )
